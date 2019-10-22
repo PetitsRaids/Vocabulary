@@ -1,4 +1,4 @@
-package com.example.words
+package com.petits_raids.words
 
 import org.junit.Test
 

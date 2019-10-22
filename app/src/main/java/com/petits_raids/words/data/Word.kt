@@ -1,4 +1,4 @@
-package com.example.words.data
+package com.petits_raids.words.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

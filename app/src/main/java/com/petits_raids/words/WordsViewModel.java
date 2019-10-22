@@ -1,18 +1,16 @@
-package com.example.words;
+package com.petits_raids.words;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.words.data.Repository;
-import com.example.words.data.Word;
+import com.petits_raids.words.data.Repository;
+import com.petits_raids.words.data.Word;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class WordsViewModel extends AndroidViewModel {

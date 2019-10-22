@@ -1,4 +1,4 @@
-package com.example.words.data;
+package com.petits_raids.words.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

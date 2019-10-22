@@ -1,4 +1,4 @@
-package com.example.words.view
+package com.petits_raids.words.view
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.words.R
-import com.example.words.WordsViewModel
-import com.example.words.data.Word
+import com.petits_raids.words.R
+import com.petits_raids.words.WordsViewModel
+import com.petits_raids.words.data.Word
 
 /**
  * A simple [Fragment] subclass.
@@ -53,7 +52,12 @@ class AddFragment : Fragment() {
         val viewModel: WordsViewModel = ViewModelProvider.AndroidViewModelFactory
             .getInstance(requireActivity().application).create(WordsViewModel::class.java)
         addBtn.setOnClickListener {
-            viewModel.insertWord(Word(addEng.text.toString().trim(), addCn.text.toString().trim()))
+            viewModel.insertWord(
+                Word(
+                    addEng.text.toString().trim(),
+                    addCn.text.toString().trim()
+                )
+            )
             val navController: NavController = Navigation.findNavController(it)
             navController.navigateUp()
         }

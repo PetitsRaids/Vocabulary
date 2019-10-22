@@ -4,7 +4,7 @@
     android:id="@+id/fragment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.WordsFragment">
+    tools:context="com.petits_raids.words.view.WordsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/words_recycler_list"

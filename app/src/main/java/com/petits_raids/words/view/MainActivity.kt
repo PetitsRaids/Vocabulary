@@ -1,11 +1,11 @@
-package com.example.words.view
+package com.petits_raids.words.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.words.R
+import com.petits_raids.words.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,7 +1,6 @@
-package com.example.words.data;
+package com.petits_raids.words.data;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 

@@ -1,4 +1,4 @@
-package com.example.words.view
+package com.petits_raids.words.view
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -19,10 +19,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.*
 
-import com.example.words.R
-import com.example.words.WordsViewModel
-import com.example.words.data.Word
-import com.example.words.support.WordsAdapter
+import com.petits_raids.words.R
+import com.petits_raids.words.WordsViewModel
+import com.petits_raids.words.data.Word
+import com.petits_raids.words.support.WordsAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -140,17 +140,13 @@ class WordsFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val word = wordList.get(viewHolder.adapterPosition)
+                val word = wordList[viewHolder.adapterPosition]
                 viewModel.deleteWord(word)
                 Snackbar.make(
                     requireActivity().findViewById<CoordinatorLayout>(R.id.fragment_layout),
                     R.string.delete_word,
                     Snackbar.LENGTH_SHORT
-                ).setAction(R.string.cancel, object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-                        viewModel.insertWord(word)
-                    }
-                }).show()
+                ).setAction(R.string.cancel) { viewModel.insertWord(word) }.show()
             }
 
             var icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete_24dp)
@@ -181,23 +177,27 @@ class WordsFragment : Fragment() {
                 backBottom = itemView.bottom
                 iconTop = itemView.top + (itemView.height - icon!!.intrinsicHeight) / 2
                 iconBottom = iconTop + icon!!.intrinsicHeight
-                if (dX > 0) {
-                    backLeft = itemView.left
-                    backRight = itemView.left + dX.toInt()
-                    background.setBounds(backLeft, backTop, backRight, backBottom)
-                    iconLeft = itemView.left + iconMargin
-                    iconRight = iconLeft + icon!!.intrinsicWidth
-                    icon!!.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-                } else if (dX < 0) {
-                    backRight = itemView.right
-                    backLeft = itemView.right + dX.toInt()
-                    background.setBounds(backLeft, backTop, backRight, backBottom)
-                    iconRight = itemView.right - iconMargin
-                    iconLeft = iconRight - icon!!.intrinsicWidth
-                    icon!!.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-                } else {
-                    background.setBounds(0, 0, 0, 0)
-                    icon!!.setBounds(0, 0, 0, 0)
+                when {
+                    dX > 0 -> {
+                        backLeft = itemView.left
+                        backRight = itemView.left + dX.toInt()
+                        background.setBounds(backLeft, backTop, backRight, backBottom)
+                        iconLeft = itemView.left + iconMargin
+                        iconRight = iconLeft + icon!!.intrinsicWidth
+                        icon!!.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                    }
+                    dX < 0 -> {
+                        backRight = itemView.right
+                        backLeft = itemView.right + dX.toInt()
+                        background.setBounds(backLeft, backTop, backRight, backBottom)
+                        iconRight = itemView.right - iconMargin
+                        iconLeft = iconRight - icon!!.intrinsicWidth
+                        icon!!.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                    }
+                    else -> {
+                        background.setBounds(0, 0, 0, 0)
+                        icon!!.setBounds(0, 0, 0, 0)
+                    }
                 }
                 background.draw(c)
                 icon!!.draw(c)

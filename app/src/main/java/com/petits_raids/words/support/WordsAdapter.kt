@@ -1,4 +1,4 @@
-package com.example.words.support
+package com.petits_raids.words.support
 
 import android.content.Context
 import android.content.Intent
@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.words.R
-import com.example.words.WordsViewModel
-import com.example.words.data.Word
+import com.petits_raids.words.R
+import com.petits_raids.words.WordsViewModel
+import com.petits_raids.words.data.Word
 
 class WordsAdapter(
     private val mContext: Context,

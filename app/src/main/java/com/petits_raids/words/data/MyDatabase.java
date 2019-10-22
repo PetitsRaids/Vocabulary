@@ -1,4 +1,4 @@
-package com.example.words.data;
+package com.petits_raids.words.data;
 
 import android.content.Context;
 
@@ -12,7 +12,7 @@ public abstract class MyDatabase extends RoomDatabase {
 
     public abstract WordsDao wordsDao();
 
-    public synchronized static MyDatabase getInstance(Context context) {
+    synchronized static MyDatabase getInstance(Context context) {
         if (myDatabase == null) {
             myDatabase = Room.databaseBuilder(context, MyDatabase.class, "word_database").build();
         }

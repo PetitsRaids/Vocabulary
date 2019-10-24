@@ -29,51 +29,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
-    def lifecycle_version = "2.0.0-alpha1"
+    def room_version = "2.2.0-alpha01"
 
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha05"
-    // alternatively - just ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // use -ktx for Kotlin
-    // alternatively - just LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata:2.1.0"
-    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
-    //     AndroidX libraries use this lightweight import for Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    // alternately - if using Java8, use the following instead of lifecycle-compiler
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
-    // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:2.2.0-alpha05" // use -ktx for Kotlin
-
-    // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-
-    def room_version = "2.0.0-alpha1"
-
-    implementation "androidx.room:room-runtime:2.2.0-rc01"
+    implementation "androidx.room:room-runtime:2.2.0"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
-    // optional - RxJava support for Room
-    implementation "androidx.room:room-rxjava2:2.2.0-rc01"
-
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:2.2.0-rc01"
-
+    // For Kotlin use kapt instead of annotationProcessor
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
+    implementation "androidx.core:core-ktx:1.1.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

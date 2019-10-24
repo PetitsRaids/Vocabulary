@@ -16,16 +16,12 @@ import com.petits_raids.words.R
 import com.petits_raids.words.WordsViewModel
 import com.petits_raids.words.data.Word
 
-/**
- * A simple [Fragment] subclass.
- */
 class AddFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add, container, false)
     }
 

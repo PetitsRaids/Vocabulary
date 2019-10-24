@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.petits_raids.words.view.WordsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/words_recycler_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
@@ -20,4 +15,10 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add_add_24dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/words_recycler_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

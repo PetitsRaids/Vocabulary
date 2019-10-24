@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.*
 
@@ -56,50 +57,6 @@ class WordsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_words, container, false)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.word_menu, menu)
-        val searchView: SearchView = menu.findItem(R.id.app_bar_search).actionView as SearchView
-        searchView.maxWidth = 750
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.wordList.removeObservers(viewLifecycleOwner)
-                viewModel.queryWord("%$newText%").observe(viewLifecycleOwner, observer)
-                return true
-            }
-        })
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.delete_all_item ->
-                AlertDialog.Builder(requireContext())
-                    .setTitle(R.string.sure_delete)
-                    .setMessage(R.string.sure_delete_all)
-                    .setPositiveButton(R.string.delete) { _, _ ->
-                        viewModel.deleteAll()
-                    }
-                    .show()
-            R.id.switch_layout_item -> {
-                useCardView = !useCardView
-                if (useCardView) {
-                    recyclerView.adapter = adapter2
-                    recyclerView.removeItemDecoration(divider)
-                    adapter2.notifyDataSetChanged()
-                } else {
-                    recyclerView.adapter = adapter1
-                    recyclerView.addItemDecoration(divider)
-                    adapter1.notifyDataSetChanged()
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
@@ -113,12 +70,13 @@ class WordsFragment : Fragment() {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val first = layoutManager.findFirstVisibleItemPosition()
                 val last = layoutManager.findLastVisibleItemPosition()
-                if (first != last)
+                if (!(first == -1 && last == -1))
                     for (i in first..last) {
                         val wordViewHolder =
                             recyclerView.findViewHolderForAdapterPosition(i) as WordsAdapter.ViewHolder
                         wordViewHolder.wordsId.text = (i + 1).toString()
                     }
+                recyclerView.smoothScrollToPosition(0)
             }
         }
         recyclerView.adapter = if (useCardView) {
@@ -218,6 +176,50 @@ class WordsFragment : Fragment() {
             val navController = Navigation.findNavController(it)
             navController.navigate(R.id.action_wordsFragment_to_addFragment)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.word_menu, menu)
+        val searchView: SearchView = menu.findItem(R.id.app_bar_search).actionView as SearchView
+        searchView.maxWidth = 1000
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.wordList.removeObservers(viewLifecycleOwner)
+                viewModel.queryWord("%$newText%").observe(viewLifecycleOwner, observer)
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_all_item ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.sure_delete)
+                    .setMessage(R.string.sure_delete_all)
+                    .setPositiveButton(R.string.delete) { _, _ ->
+                        viewModel.deleteAll()
+                    }
+                    .show()
+            R.id.switch_layout_item -> {
+                useCardView = !useCardView
+                if (useCardView) {
+                    recyclerView.adapter = adapter2
+                    recyclerView.removeItemDecoration(divider)
+                    adapter2.notifyDataSetChanged()
+                } else {
+                    recyclerView.adapter = adapter1
+                    recyclerView.addItemDecoration(divider)
+                    adapter1.notifyDataSetChanged()
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

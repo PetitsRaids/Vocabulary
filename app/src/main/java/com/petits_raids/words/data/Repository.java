@@ -12,6 +12,7 @@ public class Repository {
 
     private MyDatabase database;
     private Executor executor;
+    private LiveData<List<Word>> wordList;
     private static Repository repository;
 
     public synchronized static Repository getInstance(Context context) {
@@ -24,6 +25,7 @@ public class Repository {
     private Repository(Context context) {
         database = MyDatabase.getInstance(context);
         executor = Executors.newSingleThreadExecutor();
+        wordList = database.wordsDao().getAllWords();
     }
 
     public void insertWord(final Word word) {
@@ -39,7 +41,7 @@ public class Repository {
     }
 
     public LiveData<List<Word>> getAllWords() {
-        return database.wordsDao().getAllWords();
+        return wordList;
     }
 
     public void updateWord(Word word) {

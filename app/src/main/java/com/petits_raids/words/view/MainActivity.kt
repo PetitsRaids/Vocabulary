@@ -3,7 +3,7 @@ package com.petits_raids.words.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.petits_raids.words.R
 
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navController = findNavController(R.id.fragment)
+        navController = Navigation.findNavController(findViewById(R.id.fragment))
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
 

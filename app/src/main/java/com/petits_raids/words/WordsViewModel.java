@@ -25,7 +25,7 @@ public class WordsViewModel extends AndroidViewModel {
         repository.insertWord(word);
     }
 
-    public void insterAll(List<Word> words) {
+    public void insertAll(List<Word> words) {
         repository.insertAll(words);
     }
 
